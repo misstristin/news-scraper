@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 
 // make assets folder static
-app.use(express.static("assets"));
+app.use(express.static("views"));
 
 // Database configuration
 var databaseUrl = "scraper";
@@ -81,14 +81,18 @@ app.get("/scrape", function(req, res) {
       var summary = $(element).children("p").text();
 
       // If this found element had a title, link, author, and summary
-      if (title && link && summary) {
-        // Insert the data in the scrapedData db
-        db.scrapedData.insert({
-          title: title,
-          link: link,
-          author: author,
-          summary: summary
-          
+      if (title && link && author && summary) {
+          // check if the title already exists, then don't add
+          // if (db.scrapedData.find({title: title})){
+          //   console.log('duplicate: ' + title);
+          // }        
+          // Insert the data in the scrapedData db
+          db.scrapedData.insert({
+            title: title, 
+            link: link,
+            author: author,
+            summary: summary
+            
         },
         function(err, inserted) {
           if (err) {
@@ -106,7 +110,11 @@ app.get("/scrape", function(req, res) {
  
   // Send a "Scrape Complete" message to the browser
   console.log("Scrape Complete");
-  res.redirect("/");
+
+  setTimeout(function(){ 
+    res.redirect("/");
+ }, 1000);
+  
 });
 
 

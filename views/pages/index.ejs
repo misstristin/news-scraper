@@ -11,9 +11,12 @@
 
 	<main>
 		<div class="mainContent">
-			<h1>News Scraper</h1>
-            
-            
+			<!-- if there are no news stories yet -->
+			<button id="getNewsButton" onclick="location.href='/scrape'">Out of the loop? Get some stories.</button>
+			
+			<div id="newsContent">
+                <!-- News stories populate here -->
+            </div>
 		</div>
 	</main>
 
@@ -24,6 +27,6 @@
 	src="https://code.jquery.com/jquery-3.3.1.min.js"
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
-		<script src="/javascript/questionsJax.js"></script>
+		<script src="../assets/app.js"></script>
 </body>
 </html>
