@@ -91,7 +91,8 @@ app.get("/scrape", function(req, res) {
             title: title, 
             link: link,
             author: author,
-            summary: summary
+            summary: summary,
+            notes: ""
             
         },
         function(err, inserted) {
@@ -117,6 +118,20 @@ app.get("/scrape", function(req, res) {
   
 });
 
+// comment and add data to database
+app.get("/comment", function(req, res) {
+  // Find all results from the scrapedData collection in the db
+  db.scrapedData.find({}, function(error, found) {
+    // Throw any errors to the console
+    if (error) {
+      console.log(error);
+    }
+    // If there are no errors, send the data to the browser as json
+    else {
+      res.json(found);
+    }
+  });
+});
 
 // Listen on port 3000
 app.listen(3000, function() {
